@@ -91,7 +91,7 @@
         }
     </style>
 </head>
-<body>
+<body onclick="select()">
 <div>
     <span id="s0"></span>
     <span id="s1"></span>
@@ -117,6 +117,7 @@
     var nowIndex = 0;
 
     function changeType(type) {
+        event.stopPropagation();
         console.log(type)
         $('a.type').removeClass('active');
         $('#change' + type).addClass('active');
@@ -126,6 +127,7 @@
     }
 
     function select() {
+        event.stopPropagation();
         $_span0.text('');
         $_span1.text('');
         $_span2.text('');
@@ -139,6 +141,7 @@
     }
 
     function showAnswer() {
+        event.stopPropagation();
         switch (nowType) {
             case 0: {
                 $_span1.text(dictionary1[nowIndex]);
