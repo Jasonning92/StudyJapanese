@@ -139,6 +139,7 @@
         }
         nowIndex = parseInt(Math.random() * nowDictionary.length);
         nowSpan.text(nowDictionary[nowIndex]);
+        nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
     }
 
     function showAnswer() {
