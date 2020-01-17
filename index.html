@@ -37,8 +37,39 @@
             text-align: center;
         }
 
-        a {
+        a.type {
             position: absolute;
+            left: 50px;
+            display: block;
+            font-size: 20px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 15px;
+            cursor: pointer;
+            border: 1px solid blanchedalmond;
+            color: blanchedalmond;
+        }
+
+        a.type.active {
+            background-color: blanchedalmond;
+            color: #252525;
+        }
+
+        a#change0 {
+            top: 50px;
+        }
+
+        a#change1 {
+            top: 90px;
+        }
+
+        a#change2 {
+            top: 130px;
+        }
+
+        a.operation {
+            position: absolute;
+            right: 50px;
             display: block;
             font-size: 20px;
             height: 40px;
@@ -50,13 +81,11 @@
         }
 
         a#answer {
-            right: 100px;
             bottom: 100px;
             background-color: blanchedalmond;
         }
 
         a#next {
-            right: 100px;
             bottom: 50px;
             background-color: aquamarine;
         }
@@ -68,8 +97,11 @@
     <span id="s1"></span>
     <span id="s2"></span>
 </div>
-<a id="answer" onclick="showAnswer()">answer</a>
-<a id="next" onclick="select()">next</a>
+<a id="change0" class="type active" onclick="changeType(0)">罗马</a>
+<a id="change1" class="type" onclick="changeType(1)">平假</a>
+<a id="change2" class="type" onclick="changeType(2)">片假</a>
+<a id="answer" class="operation" onclick="showAnswer()">answer</a>
+<a id="next" class="operation" onclick="select()">next</a>
 <script>
     var nowType = 0;
 
@@ -83,6 +115,15 @@
 
     var nowDictionary = [];
     var nowIndex = 0;
+
+    function changeType(type) {
+        console.log(type)
+        $('a.type').removeClass('active');
+        $('#change' + type).addClass('active');
+        nowDictionary = [];
+        nowType = type;
+        select();
+    }
 
     function select() {
         $_span0.text('');
@@ -118,9 +159,9 @@
     }
 
     document.addEventListener('keydown', function (e) {
-        if(e.keyCode === 32){
+        if (e.keyCode === 32) {
             select();
-        }else {
+        } else {
             showAnswer();
         }
     })
