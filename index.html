@@ -99,7 +99,7 @@
         }
     </style>
 </head>
-<body onclick="select()">
+<body onclick="clickBody()">
 <div>
     <span id="s0"></span>
     <span id="s1"></span>
@@ -112,6 +112,7 @@
 <a id="answer" class="operation" onclick="showAnswer()">answer</a>
 <a id="next" class="operation" onclick="select()">next</a>
 <script>
+    var isShowAnswer = false;
     var nowType = 0;
 
     var $_span0 = $('span#s0');
@@ -152,15 +153,16 @@
         $_span0.text('');
         $_span1.text('');
         $_span2.text('');
+        isShowAnswer = false;
         var dictionary = eval('dictionary' + nowType).concat();
         var nowSpan = eval('$_span' + nowType);
         if (nowDictionary.length === 0) {
             nowDictionary = dictionary.concat();
         }
+        $('i').text(nowDictionary.length);
         nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
         nowIndex = parseInt(Math.random() * nowDictionary.length);
         nowSpan.text(nowDictionary[nowIndex]);
-        $('i').text(nowDictionary.length);
     }
 
     function showAnswer() {
@@ -201,6 +203,7 @@
                 break;
             }
         }
+        isShowAnswer = true;
     }
 
     document.addEventListener('keydown', function (e) {
@@ -210,6 +213,14 @@
             showAnswer();
         }
     })
+
+    function clickBody() {
+        if (isShowAnswer) {
+            select();
+        } else {
+            showAnswer();
+        }
+    }
 </script>
 </body>
 </html>
