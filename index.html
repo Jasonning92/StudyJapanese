@@ -159,8 +159,11 @@
         if (nowDictionary.length === 0) {
             nowDictionary = dictionary.concat();
         }
+        else{
+            nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
+        }
+        console.log(nowDictionary)
         $('i').text(nowDictionary.length);
-        nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
         nowIndex = parseInt(Math.random() * nowDictionary.length);
         nowSpan.text(nowDictionary[nowIndex]);
     }
