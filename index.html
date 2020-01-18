@@ -91,7 +91,7 @@
             background-color: aquamarine;
         }
 
-        i#count{
+        i#count {
             position: absolute;
             right: 10px;
             top: 10px;
@@ -118,9 +118,21 @@
     var $_span1 = $('span#s1');
     var $_span2 = $('span#s2');
 
-    var dictionary0 = 'a,i,u,e,o,ka,ki,ku,ke,ko,sa,shi,su,se,so,ta,chi,tsu,te,so'.split(',');
-    var dictionary1 = 'あいうえおかきくけこさしすせそたちつてと'.split('');
-    var dictionary2 = 'アイウエオカキクケコサシスセソタチツテト'.split('');
+    var dictionary0 =
+        ('a,i,u,e,o,' +
+            'ka,ki,ku,ke,ko,' +
+            'sa,shi,su,se,so,' +
+            'ta,chi,tsu,te,so').split(',');
+    var dictionary1 =
+        ('あいうえお' +
+            'かきくけこ' +
+            'さしすせそ' +
+            'たちつてと').split('');
+    var dictionary2 =
+        ('アイウエオ' +
+            'カキクケコ' +
+            'サシスセソ' +
+            'タチツテト').split('');
 
     var nowDictionary = [];
     var nowIndex = 0;
@@ -145,28 +157,47 @@
         if (nowDictionary.length === 0) {
             nowDictionary = dictionary.concat();
         }
+        nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
         nowIndex = parseInt(Math.random() * nowDictionary.length);
         nowSpan.text(nowDictionary[nowIndex]);
         $('i').text(nowDictionary.length);
-        nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
     }
 
     function showAnswer() {
         event.stopPropagation();
+        var listIndex = 0;
         switch (nowType) {
             case 0: {
-                $_span1.text(dictionary1[nowIndex]);
-                $_span2.text(dictionary2[nowIndex]);
+                for (let i = 0; i < dictionary0.length; i++) {
+                    if (dictionary0[i] === nowDictionary[nowIndex]) {
+                        listIndex = i;
+                        break;
+                    }
+                }
+                $_span1.text(dictionary1[listIndex]);
+                $_span2.text(dictionary2[listIndex]);
                 break;
             }
             case 1: {
-                $_span0.text(dictionary0[nowIndex]);
-                $_span2.text(dictionary2[nowIndex]);
+                for (let i = 0; i < dictionary1.length; i++) {
+                    if (dictionary1[i] === nowDictionary[nowIndex]) {
+                        listIndex = i;
+                        break;
+                    }
+                }
+                $_span0.text(dictionary0[listIndex]);
+                $_span2.text(dictionary2[listIndex]);
                 break;
             }
             case 2: {
-                $_span0.text(dictionary0[nowIndex]);
-                $_span1.text(dictionary1[nowIndex]);
+                for (let i = 0; i < dictionary2.length; i++) {
+                    if (dictionary2[i] === nowDictionary[nowIndex]) {
+                        listIndex = i;
+                        break;
+                    }
+                }
+                $_span0.text(dictionary0[listIndex]);
+                $_span1.text(dictionary1[listIndex]);
                 break;
             }
         }
