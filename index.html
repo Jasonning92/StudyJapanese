@@ -90,6 +90,13 @@
             right: 10px;
             background-color: aquamarine;
         }
+
+        i#count{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            color: #f1f1f1;
+        }
     </style>
 </head>
 <body onclick="select()">
@@ -98,6 +105,7 @@
     <span id="s1"></span>
     <span id="s2"></span>
 </div>
+<i id="count"></i>
 <a id="change0" class="type active" onclick="changeType(0)">罗马</a>
 <a id="change1" class="type" onclick="changeType(1)">平假</a>
 <a id="change2" class="type" onclick="changeType(2)">片假</a>
@@ -139,6 +147,7 @@
         }
         nowIndex = parseInt(Math.random() * nowDictionary.length);
         nowSpan.text(nowDictionary[nowIndex]);
+        $('i').text(nowDictionary.length);
         nowDictionary.splice($.inArray(nowDictionary[nowIndex], nowDictionary), 1);
     }
 
